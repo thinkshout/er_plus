@@ -1,0 +1,7 @@
+name = Entity Reference Plus
+description = TODO: Description of module
+package = Fields
+core = 7.x
+
+dependencies[] = entityreference
+dependencies[] = references_dialog
