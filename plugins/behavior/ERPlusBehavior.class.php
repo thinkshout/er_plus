@@ -7,7 +7,7 @@ class ERPlusBehavior extends EntityReference_BehaviorHandler_Abstract {
       'description' => 'Target view mode machine name.',
       'type' => 'varchar',
       'length' => 32,
-      'default' => '',
+      'default' => 'full',
       'not null' => FALSE,
     );
     $schema['columns']['header'] = array(
@@ -18,6 +18,10 @@ class ERPlusBehavior extends EntityReference_BehaviorHandler_Abstract {
       'default' => '',
       'not null' => FALSE,
     );
+  }
+
+  public function property_info_alter(&$info, $entity_type, $field, $instance, $field_type) {
+
   }
 
   public function load($entity_type, $entities, $field, $instances, $langcode, &$items) {

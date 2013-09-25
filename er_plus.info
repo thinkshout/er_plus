@@ -3,5 +3,8 @@ description = TODO: Description of module
 package = Fields
 core = 7.x
 
+; Migrate handler.
+files[] = er_plus.migrate.inc
+
 dependencies[] = entityreference
 dependencies[] = references_dialog
