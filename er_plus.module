@@ -216,22 +216,25 @@ function er_plus_field_formatter_view($entity_type, $entity, $field, $instance, 
     case 'er_plus_formatter':
       foreach ($items as $delta => $item) {
         $ref_entity = entity_load($ref_entity_type, array($item['target_id']));
-        $ref_entity_view = entity_view(
-          $ref_entity_type,
-          array($ref_entity[$item['target_id']]),
-          $item['view_mode']
-        );
-        if ($item['header'] != '') {
-          $ref_entity_view['header'] = array(
-            '#type' => 'markup',
-            '#markup' => $item['header'],
-            '#prefix' => '<h3>',
-            '#suffix' => '</h3>',
-            '#weight' => -100,
+        if ($ref_entity) {
+          $ref_entity_view = entity_view(
+            $ref_entity_type,
+            array($ref_entity[$item['target_id']]),
+            $item['view_mode']
           );
+          if ($item['header'] != '') {
+            $ref_entity_view['header'] = array(
+              '#type' => 'markup',
+              '#markup' => $item['header'],
+              '#prefix' => '<h3>',
+              '#suffix' => '</h3>',
+              '#weight' => -100,
+            );
+          }
+          $output = drupal_render($ref_entity_view);
+          $element[$delta] = array('#markup' => $output);
         }
-        $output = drupal_render($ref_entity_view);
-        $element[$delta] = array('#markup' => $output);
+
       }
       break;
   }
