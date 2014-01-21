@@ -26,13 +26,12 @@ class MigrateERPlusFieldHandler extends MigrateEntityReferenceFieldHandler {
 
   public function prepare($entity, array $field_info, array $instance, array $values) {
     parent::prepare($entity, $field_info, $instance, $values);
-    $elements = element_children($values);
     $items = array();
-    foreach ($elements as $delta => $item_id) {
-      if (is_int($item_id) && $item_id !== 0) {
-        $items[$item_id]['target_id'] = $values[$delta]['destid1'];
-        $items[$item_id]['view_mode'] = $values['arguments']['view_mode'][$item_id];
-        $items[$item_id]['header'] = isset($values['arguments']['header'][$item_id]) ? $values['arguments']['header'][$item_id] : '';
+    foreach ($values as $delta => $item_id) {
+      if (is_int($delta) && is_array($item_id)) {
+        $items[$delta]['target_id'] = $values[$delta]['destid1'];
+        $items[$delta]['view_mode'] = $values['arguments']['view_mode'][$delta];
+        $items[$delta]['header'] = isset($values['arguments']['header'][$delta]) ? $values['arguments']['header'][$delta] : '';
       }
 
     }
