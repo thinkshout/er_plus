@@ -33,6 +33,11 @@ class MigrateERPlusFieldHandler extends MigrateEntityReferenceFieldHandler {
         $items[$delta]['view_mode'] = $values['arguments']['view_mode'][$delta];
         $items[$delta]['header'] = isset($values['arguments']['header'][$delta]) ? $values['arguments']['header'][$delta] : '';
       }
+      if ($delta === 'destid1') {
+        $items[$delta]['target_id'] = $values['destid1'];
+        $items[$delta]['view_mode'] = $values['arguments']['view_mode'][0];
+        $items[$delta]['header'] = isset($values['arguments']['header'][0]) ? $values['arguments']['header'][0] : '';
+      }
 
     }
 
