@@ -25,7 +25,10 @@ class MigrateERPlusFieldHandler extends MigrateEntityReferenceFieldHandler {
   }
 
   public function prepare($entity, array $field_info, array $instance, array $values) {
-    parent::prepare($entity, $field_info, $instance, $values);
+    $parent_return = parent::prepare($entity, $field_info, $instance, $values);
+    if (isset($values['arguments']) && $values['arguments']['file_class'] == 'MigrateEntityReferenceFieldHandler') {
+      return $parent_return;
+    }
     $items = array();
     foreach ($values as $delta => $item_id) {
       if (is_int($delta) && is_array($item_id)) {
@@ -64,6 +67,7 @@ class MigrateERPlusFieldHandler extends MigrateEntityReferenceFieldHandler {
     $fields = array();
     $fields['view_mode'] = t('Subfield: View mode for the field');
     $fields['header'] = t('Subfield: Header for the field');
+    $fields['file_class'] = t('Subfield: Class to use. Currently, only MigrateEntityReferenceFieldHandler is supported as an option.');
     return $fields;
   }
 
