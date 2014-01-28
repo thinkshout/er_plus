@@ -26,7 +26,7 @@ class MigrateERPlusFieldHandler extends MigrateEntityReferenceFieldHandler {
 
   public function prepare($entity, array $field_info, array $instance, array $values) {
     $parent_return = parent::prepare($entity, $field_info, $instance, $values);
-    if (isset($values['arguments']) && $values['arguments']['file_class'] == 'MigrateEntityReferenceFieldHandler') {
+    if (isset($values['arguments']['file_class']) && $values['arguments']['file_class'] == 'MigrateEntityReferenceFieldHandler') {
       return $parent_return;
     }
     $items = array();
